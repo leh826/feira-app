@@ -146,7 +146,6 @@ class FilterActionBar extends StatelessWidget {
 
                 const SizedBox(height: 6),
 
-                // 🧼 LIMPAR ALINHADO À DIREITA
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(

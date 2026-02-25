@@ -43,18 +43,18 @@ class SearchBarWidget extends StatelessWidget {
           const SizedBox(width: 10),
 
           // Botão de filtro
-          InkWell(
-            onTap: onFilterTap,
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(Icons.tune),
-            ),
-          ),
+        //   InkWell(
+        //     onTap: onFilterTap,
+        //     borderRadius: BorderRadius.circular(12),
+        //     child: Container(
+        //       padding: const EdgeInsets.all(12),
+        //       decoration: BoxDecoration(
+        //         color: Colors.grey.shade200,
+        //         borderRadius: BorderRadius.circular(12),
+        //       ),
+        //       child: const Icon(Icons.tune),
+        //     ),
+        //   ),
         ],
       ),
     );
