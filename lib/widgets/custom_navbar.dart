@@ -29,9 +29,14 @@ class CustomNavBar extends StatelessWidget {
             index: 0,
           ),
           _buildNavItem(
+            icon: Icons.search,
+            label: "Pesquisa",
+            index: 1,
+          ),
+          _buildNavItem(
             icon: Icons.person,
             label: "Perfil",
-            index: 1,
+            index: 2,
           ),
         ],
       ),

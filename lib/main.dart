@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'features/home/home_page.dart';
 import 'features/perfil/perfil_page.dart';
+import 'features/pesquisa/pesquisa_page.dart';
 import 'widgets/custom_navbar.dart';
 import 'widgets/custom_topbar.dart';
 
@@ -32,6 +33,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = const [
     HomePage(),
+    SearchScreen(),
     ProfilePage(),
   ];
 
