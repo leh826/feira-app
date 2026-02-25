@@ -1,3 +1,5 @@
+import 'package:eguadafeira/models/review.dart';
+
 import '../models/producer.dart';
 import '../models/product.dart';
 import '../models/filter_model.dart';
@@ -30,45 +32,108 @@ class MockDatabase {
       name: "Tomate Orgânico",
       price: 8.50,
       producerId: "p1",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1657786269673-ce9d14962651?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Hortaliças",
-      rating: 4.5,
+      conservation:
+        "Conservar em local fresco e arejado. Na geladeira dura até 7 dias.",
+      production:
+          "Cultivado sem agrotóxicos, com adubação natural e irrigação controlada.",
+      reviews: mockReviews1,
+        rating: 4.5,
     ),
     Product(
       id: "prod2",
       name: "Alface Crespa",
       price: 3.00,
       producerId: "p1",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1692606280428-7df25e4daefb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Hortaliças",
       rating: 4.0,
+       conservation:
+        "Manter refrigerado e consumir em até 5 dias.",
+      production:
+          "Produzido em sistema hidropônico com controle de nutrientes.",
+      reviews: mockReviews2,
     ),
     Product(
       id: "prod3",
       name: "Cenoura",
       price: 5.20,
       producerId: "p2",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1769258896450-afaf01876052?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Legumes",
       rating: 4.0,
+      conservation:
+        "Guardar na geladeira dentro de saco perfurado por até 10 dias.",
+      production:
+          "Cultivo tradicional com rotação de culturas para manter o solo saudável.",
+      reviews: [
+        Review(
+          userName: "Fernanda Lima",
+          rating: 4,
+          comment: "Bem crocante e doce.",
+        ),
+        ],
     ),
     Product(
       id: "prod4",
       name: "Batata Doce",
       price: 6.00,
       producerId: "p2",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1570723735746-c9bd51bd7c40?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Não cadastrada",
       rating: 5.0,
+      conservation:
+        "Armazenar em local seco e ventilado por até 15 dias.",
+      production:
+          "Plantio orgânico com controle biológico de pragas.",
+      reviews: [],
     ),
     Product(
       id: "prod5",
       name: "Morango",
       price: 12.00,
       producerId: "p3",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1591271300850-22d6784e0a7f?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Frutas",
       rating: 5.0,
+      conservation:
+        "Manter refrigerado e consumir em até 3 dias.",
+      production:
+          "Cultivado em estufa com controle de temperatura e irrigação por gotejamento.",
+      reviews: [
+        Review(
+          userName: "Juliana Rocha",
+          rating: 5,
+          comment: "Extremamente doce e fresco!",
+        ),
+        Review(
+          userName: "Rafael Costa",
+          rating: 5,
+          comment: "Os melhores morangos que já comprei.",
+        ),
+      ],
+    ),
+  ];
+
+  static List<Review> mockReviews1 = [
+    Review(
+      userName: "Maria Silva",
+      rating: 5,
+      comment: "Muito fresco e saboroso!",
+    ),
+    Review(
+      userName: "Carlos Souza",
+      rating: 4,
+      comment: "Chegou bem embalado e rápido.",
+    ),
+  ];
+
+  static List<Review> mockReviews2 = [
+    Review(
+      userName: "Ana Paula",
+      rating: 5,
+      comment: "Produto excelente, recomendo!",
     ),
   ];
 

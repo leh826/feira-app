@@ -1,3 +1,5 @@
+import 'package:eguadafeira/models/review.dart';
+
 class Product {
   final String id;
   final String name;
@@ -7,6 +9,10 @@ class Product {
   final String category;
   final double rating;
 
+ final String conservation; // NOVO
+  final String production;   // NOVO
+  final List<Review> reviews; // NOVO
+
   Product({
     required this.id,
     required this.name,
@@ -15,5 +21,8 @@ class Product {
     required this.imageUrl,
     required this.category,
     required this.rating,
+    required this.conservation,
+    required this.production,
+    required this.reviews,
   });
 }
