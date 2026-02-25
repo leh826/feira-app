@@ -123,39 +123,6 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
               }).toList(),
             ),
 
-            const SizedBox(height: 20),
-
-            DropdownButtonFormField<SortOption>(
-              value: sortOption,
-              decoration: const InputDecoration(
-                labelText: "Ordenar por",
-                border: OutlineInputBorder(),
-              ),
-              items: const [
-                DropdownMenuItem(
-                  value: SortOption.none,
-                  child: Text("Padrão"),
-                ),
-                DropdownMenuItem(
-                  value: SortOption.nameAsc,
-                  child: Text("Nome (A-Z)"),
-                ),
-                DropdownMenuItem(
-                  value: SortOption.nameDesc,
-                  child: Text("Nome (Z-A)"),
-                ),
-                DropdownMenuItem(
-                  value: SortOption.ratingHigh,
-                  child: Text("Maior avaliação"),
-                ),
-                DropdownMenuItem(
-                  value: SortOption.ratingLow,
-                  child: Text("Menor avaliação"),
-                ),
-              ],
-              onChanged: (value) => setState(() => sortOption = value!),
-            ),
-
             const SizedBox(height: 24),
 
             SizedBox(

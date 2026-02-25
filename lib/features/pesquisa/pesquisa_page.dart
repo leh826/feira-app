@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../widgets/search_bar_widget.dart';
 import '../../widgets/product_card_widget.dart';
+import '../../widgets/filter_action_bar.dart';
 import '../../widgets/filter_bottom_sheet.dart';
 import '../../data/producers_data.dart';
 import '../../models/product.dart';
@@ -40,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _openFilters() {
-    showModalBottomSheet(
+    showDialog(
       context: context,
       builder: (context) {
         return FilterDialogWidget(
@@ -56,6 +57,25 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  void _onSortChanged(SortOption option) {
+    setState(() {
+      filters = filters.copyWith(sortOption: option);
+      _applySearch();
+    });
+  }
+
+  void _clearFilters() {
+    setState(() {
+      filters = const FilterModel(
+        region: "All",
+        category: null,
+        minRating: null,
+        sortOption: SortOption.none,
+      );
+      _applySearch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,15 +89,11 @@ class _SearchScreenState extends State<SearchScreen> {
             onFilterTap: _openFilters,
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Região: ${filters.region}",
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.grey,
-              ),
-            ),
+          FilterActionBar(
+            filters: filters,
+            onOpenFilters: _openFilters,
+            onClear: _clearFilters,
+            onSortChanged: _onSortChanged,
           ),
 
           Expanded(
