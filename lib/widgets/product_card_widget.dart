@@ -26,112 +26,75 @@ class ProductCardWidget extends StatelessWidget {
         );
       },
       child: Container(
-        width: 180,
-        margin: const EdgeInsets.only(right: 16),
+        width: 130,
+        margin: const EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              // ignore: deprecated_member_use
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+             color: Colors.black.withValues(alpha: 0.08),
+              blurRadius: 8,
+              offset: const Offset(0, 3),
             )
           ],
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            /// IMAGEM + FAVORITO
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
-                  child: Image.network(
-                    product.imageUrl,
-                    height: 140,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.favorite_border,
-                      size: 18,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ],
+            /// IMAGEM
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(18),
+              ),
+              child: Image.network(
+                product.imageUrl,
+                height: 100,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
 
             Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10), 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
 
-                  // /// Indicador verde (simulando bolinhas)
-                  // Row(
-                  //   children: List.generate(
-                  //     5,
-                  //     (index) => Container(
-                  //       margin: const EdgeInsets.only(right: 4),
-                  //       width: 6,
-                  //       height: 6,
-                  //       decoration: BoxDecoration(
-                  //         color: index < 3
-                  //             ? AppColors.primaryGreen
-                  //             : Colors.grey.shade300,
-                  //         borderRadius: BorderRadius.circular(10),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  const SizedBox(height: 8),
-
-                  /// Nome
+                  /// Nome (evita overflow)
                   Text(
                     product.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis, 
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 15,
+                      fontSize: 14,
                     ),
                   ),
 
                   const SizedBox(height: 6),
+
                   /// Avaliação
                   Row(
                     children: [
                       const Icon(
                         Icons.star,
-                        size: 16,
+                        size: 14,
                         color: Colors.amber,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         product.rating.toString(),
-                        style: const TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
