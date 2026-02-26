@@ -27,8 +27,7 @@ class FilterActionBar extends StatelessWidget {
       case SortOption.ratingLow:
         return "Menor avaliação";
       case SortOption.none:
-      default:
-        return "Ordenar";
+      return "Ordenar";
     }
   }
 
@@ -79,7 +78,7 @@ class FilterActionBar extends StatelessWidget {
               children: [
 
                 DropdownButtonFormField<SortOption>(
-                  value: filters.sortOption,
+                  initialValue: filters.sortOption,
                   icon: const Icon(
                     Icons.keyboard_arrow_down_rounded,
                     color: AppColors.primaryGreen,
