@@ -27,8 +27,7 @@ class FilterActionBar extends StatelessWidget {
       case SortOption.ratingLow:
         return "Menor avaliação";
       case SortOption.none:
-      default:
-        return "Ordenar";
+      return "Ordenar";
     }
   }
 
@@ -37,10 +36,10 @@ class FilterActionBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: BorderSide(color: Colors.grey.shade300),
-        ),
+        // color: Colors.white,
+        // border: Border(
+        //   bottom: BorderSide(color: Colors.grey.shade300),
+        // ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,14 +72,13 @@ class FilterActionBar extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // 📊 Ordenação + Limpar
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
                 DropdownButtonFormField<SortOption>(
-                  value: filters.sortOption,
+                  initialValue: filters.sortOption,
                   icon: const Icon(
                     Icons.keyboard_arrow_down_rounded,
                     color: AppColors.primaryGreen,

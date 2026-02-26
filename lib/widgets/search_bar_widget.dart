@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/utils/app_colors.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final Function(String) onChanged;
@@ -16,10 +17,10 @@ class SearchBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 16,
+        horizontal: 12,
         vertical: 10,
       ),
-      // color: Colors.white,
+      color: AppColors.primaryGreen,
       child: Row(
         children: [
           // Campo de busca
@@ -30,7 +31,7 @@ class SearchBarWidget extends StatelessWidget {
                 hintText: hintText,
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
-                fillColor: Colors.grey.shade100,
+                fillColor: AppColors.lightBeige,
                 contentPadding: const EdgeInsets.symmetric(vertical: 0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -42,19 +43,6 @@ class SearchBarWidget extends StatelessWidget {
 
           const SizedBox(width: 10),
 
-          // Botão de filtro
-        //   InkWell(
-        //     onTap: onFilterTap,
-        //     borderRadius: BorderRadius.circular(12),
-        //     child: Container(
-        //       padding: const EdgeInsets.all(12),
-        //       decoration: BoxDecoration(
-        //         color: Colors.grey.shade200,
-        //         borderRadius: BorderRadius.circular(12),
-        //       ),
-        //       child: const Icon(Icons.tune),
-        //     ),
-        //   ),
         ],
       ),
     );

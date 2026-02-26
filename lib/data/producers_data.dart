@@ -138,7 +138,7 @@ class MockDatabase {
   ];
 
   static List<Product> getProductsByRegion(String region) {
-    if (region == "All") return List.from(products);
+    if (region == "Todos") return List.from(products);
 
     final producerIds = producers
         .where((producer) => producer.region == region)
@@ -183,7 +183,7 @@ class MockDatabase {
     List<Product> result = List.from(products);
 
     //região
-    if (filters.region != "All") {
+    if (filters.region != "Todos") {
       final producerIds = producers
           .where((p) => p.region == filters.region)
           .map((p) => p.id)
@@ -212,7 +212,7 @@ class MockDatabase {
     //categoria
     if (filters.category != null &&
         filters.category!.isNotEmpty &&
-        filters.category != "All") {
+        filters.category != "Todos") {
       result = result
           .where((product) => product.category == filters.category)
           .toList();
@@ -273,7 +273,7 @@ class MockDatabase {
         .toList();
 
     categories.sort();
-    categories.insert(0, "All");
+    categories.insert(0, "Todos");
 
     return categories;
   }

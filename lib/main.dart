@@ -4,6 +4,7 @@ import 'features/perfil/perfil_page.dart';
 import 'features/pesquisa/pesquisa_page.dart';
 import 'widgets/custom_navbar.dart';
 import 'widgets/custom_topbar.dart';
+import 'core/utils/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +15,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.lightBeige,
+
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primaryGreen,
+        ),
+
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.primaryGreen,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
+
+        cardColor: Colors.white,
+        useMaterial3: true,
+      ),
+
+      home: const MainPage(),
     );
   }
 }
-
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 

@@ -8,11 +8,10 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black54,
-      body: Center(
+    return Dialog(
+      backgroundColor: Colors.transparent,
+       insetPadding: const EdgeInsets.all(20),
         child: Container(
-          margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: const Color(0xFFE9E2D0),
@@ -134,7 +133,6 @@ class ProductDetailsPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }
