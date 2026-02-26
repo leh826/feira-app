@@ -18,11 +18,10 @@ class ProductCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => ProductDetailsPage(product: product),
-          ),
+        showDialog(
+          context: context,
+          barrierColor: Colors.black54, // fundo escuro transparente
+          builder: (_) => ProductDetailsPage(product: product),
         );
       },
       child: Container(
