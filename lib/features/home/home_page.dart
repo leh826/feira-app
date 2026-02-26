@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 12),
 
               SizedBox(
-                height: 170, // Aumentado de 150 para 160 para evitar overflow na base
+                height: 150, // Aumentado de 150 para 160 para evitar overflow na base
                 child: PageView.builder(
                   controller: PageController(viewportFraction: 0.75), // Viewport ajustado
                   itemCount: topRated.length,
