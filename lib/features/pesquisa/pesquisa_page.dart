@@ -17,7 +17,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String searchText = "";
-  FilterModel filters = const FilterModel(region: "Belém");
+  FilterModel filters = const FilterModel(region: "Belém"); //mudar para a do usuário logado depois
   List<Product> results = [];
 
   @override
@@ -67,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void _clearFilters() {
     setState(() {
       filters = const FilterModel(
-        region: "All",
+        region: "Todos",
         category: null,
         minRating: null,
         sortOption: SortOption.none,
@@ -79,9 +79,9 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pesquisa'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Pesquisa'),
+      // ),
       body: Column(
         children: [
           SearchBarWidget(
