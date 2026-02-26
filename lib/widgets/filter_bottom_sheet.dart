@@ -25,15 +25,18 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
     "Belém",
     "Ananindeua",
     "Castanhal",
-    "All",
+    "Todos",
   ];
 
   final List<String> categories = [
     "Frutas",
     "Verduras",
+    "Hortaliças",
     "Legumes",
     "Orgânicos",
-    "All",
+    "Temperos",
+    "Veganos",
+    "Todos",
   ];
 
   @override
@@ -69,9 +72,27 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              "Filtros",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            /// Título + botão fechar (igual ao modal de produto)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Filtros",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white, size: 18),
+                    onPressed: () => Navigator.pop(context),
+                    splashRadius: 18,
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 20),
@@ -132,7 +153,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
                   widget.onApply(
                     FilterModel(
                       region: region,
-                      category: category == "All" ? null : category,
+                      category: category == "Todos" ? null : category,
                       minRating: minRating,
                       sortOption: sortOption,
                     ),

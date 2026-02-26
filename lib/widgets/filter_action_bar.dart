@@ -37,10 +37,10 @@ class FilterActionBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: BorderSide(color: Colors.grey.shade300),
-        ),
+        // color: Colors.white,
+        // border: Border(
+        //   bottom: BorderSide(color: Colors.grey.shade300),
+        // ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,6 @@ class FilterActionBar extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // 📊 Ordenação + Limpar
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
