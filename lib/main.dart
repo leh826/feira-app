@@ -5,6 +5,7 @@ import 'features/pesquisa/pesquisa_page.dart';
 import 'widgets/custom_navbar.dart';
 import 'widgets/custom_topbar.dart';
 import 'core/utils/app_colors.dart';
+import 'data/producers_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,11 +50,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomePage(),
-    SearchScreen(),
-    ProfilePage(),
-  ];
+final List<Widget> _pages = [
+  HomePage(producers: MockDatabase.producers),
+  const SearchScreen(),
+  const ProfilePage(),
+];
 
   void _changePage(int index) {
     setState(() {

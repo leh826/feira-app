@@ -10,19 +10,28 @@ class MockDatabase {
       id: "p1",
       name: "João Hortifruti",
       region: "Belém",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+      categoria: 'Hortifruti', 
+      avaliacao: 4.5, 
+      totalAvaliacoes: 120,
     ),
     Producer(
       id: "p2",
       name: "Fazenda Verde",
       region: "Ananindeua",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+      categoria: 'Hortifruti', 
+      avaliacao: 4.0, 
+      totalAvaliacoes: 85,
     ),
     Producer(
       id: "p3",
       name: "Sítio Boa Terra",
       region: "Castanhal",
-      imageUrl: "https://via.placeholder.com/150",
+      imageUrl: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+      categoria: 'Hortifruti', 
+      avaliacao: 5.0, 
+      totalAvaliacoes: 150,
     ),
   ];
 
@@ -258,6 +267,9 @@ class MockDatabase {
         name: "Produtor desconhecido",
         region: "Desconhecida",
         imageUrl: "",
+        categoria: 'sem categoria',
+        avaliacao: 0.0, 
+        totalAvaliacoes: 0,
       ),
     );
   }
