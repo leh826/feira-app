@@ -22,7 +22,7 @@ class _ProducerCardState extends State<ProducerCard> {
         borderRadius: BorderRadius.circular(24), // Bordas mais arredondadas como no print
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -109,7 +109,7 @@ child: Padding(
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.15),
+                color: Colors.amber.withValues(alpha: 0.18),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Row(

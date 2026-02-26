@@ -2,28 +2,23 @@ import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../models/producer.dart';
 //import '../../core/utils/app_colors.dart';
-import '../../features/produtos/product_details_page.dart';
 
 class ProductCardWidget extends StatelessWidget {
   final Product product;
   final Producer producer;
+   final VoidCallback? onTap;
 
   const ProductCardWidget({
     super.key,
     required this.product,
-    required this.producer, required Null Function() onTap,
+    required this.producer,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          barrierColor: Colors.black54, // fundo escuro transparente
-          builder: (_) => ProductDetailsPage(product: product),
-        );
-      },
+      onTap: onTap,
       child: Container(
         width: 130,
         margin: const EdgeInsets.only(right: 12),

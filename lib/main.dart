@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
 final List<Widget> _pages = [
-  HomePage(producers: MockDatabase.producers),
+  HomePage(producers: MockDatabase.producers,  products: MockDatabase.products,),
   const SearchScreen(),
   const ProfilePage(),
 ];

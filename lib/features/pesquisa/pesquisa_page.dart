@@ -1,3 +1,4 @@
+import 'package:eguadafeira/features/produtos/product_details_page.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/search_bar_widget.dart';
 import '../../widgets/product_card_widget.dart';
@@ -114,7 +115,13 @@ class _SearchScreenState extends State<SearchScreen> {
                       return ProductCardWidget(
                         product: product,
                         producer: producer,
-                        onTap: () {},
+                        onTap: () {
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.black54,
+                          builder: (_) => ProductDetailsPage(product: product),
+                        );
+                      },
                       );
                     },
                   ),
