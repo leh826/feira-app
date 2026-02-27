@@ -49,8 +49,11 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   List<Widget> get _pages => [
-        HomePage(producers: MockDatabase.producers),
-        const SearchScreen(),
+        HomePage(
+          producers: MockDatabase.producers,
+          products: MockDatabase.products,
+        ),
+        SearchScreen(userData: widget.userData),
         ProfilePage(userData: widget.userData),
       ];
 
@@ -64,9 +67,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomTopBar(),
-      
-      body: _pages[_currentIndex], 
-      
+      body: _pages[_currentIndex],
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
         onTap: _changePage,

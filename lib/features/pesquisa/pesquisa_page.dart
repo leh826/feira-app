@@ -1,3 +1,4 @@
+import 'package:eguadafeira/features/produtos/product_details_page.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/search_bar_widget.dart';
 import '../../widgets/product_card_widget.dart';
@@ -9,7 +10,8 @@ import '../../models/producer.dart';
 import '../../models/filter_model.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  final Map<String, dynamic> userData;
+  const SearchScreen({super.key, required this.userData});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -17,20 +19,29 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String searchText = "";
-  FilterModel filters = const FilterModel(region: "Belém"); //mudar para a do usuário logado depois
+  
+  late FilterModel filters;
   List<Product> results = [];
 
   @override
   void initState() {
     super.initState();
+    
+    // Inicializa os filtros com a cidade do usuário logado
+    filters = FilterModel(
+      region: widget.userData['cidade'] ?? "Todos",
+    );
+    
     _applySearch();
   }
 
   void _applySearch() {
-    results = MockDatabase.advancedSearch(
-      query: searchText,
-      filters: filters,
-    );
+    setState(() {
+      results = MockDatabase.advancedSearch(
+        query: searchText,
+        filters: filters,
+      );
+    });
   }
 
   void _onSearchChanged(String value) {
@@ -66,8 +77,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _clearFilters() {
     setState(() {
-      filters = const FilterModel(
-        region: "Todos",
+      // Ao limpar, voltamos para a cidade do usuário logado em vez de "Todos"
+      filters = FilterModel(
+        region: widget.userData['cidade'] ?? "Todos",
         category: null,
         minRating: null,
         sortOption: SortOption.none,
@@ -79,9 +91,6 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Pesquisa'),
-      // ),
       body: Column(
         children: [
           SearchBarWidget(
@@ -100,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: results.isEmpty
                 ? const Center(
                     child: Text(
-                      "Nenhum produto encontrado",
+                      "Nenhum produto encontrado nesta região",
                       style: TextStyle(fontSize: 16),
                     ),
                   )
@@ -114,7 +123,13 @@ class _SearchScreenState extends State<SearchScreen> {
                       return ProductCardWidget(
                         product: product,
                         producer: producer,
-                        onTap: () {},
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            barrierColor: Colors.black54,
+                            builder: (_) => ProductDetailsPage(product: product),
+                          );
+                        },
                       );
                     },
                   ),

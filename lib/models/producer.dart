@@ -5,7 +5,8 @@ class Producer {
   final String imageUrl; 
   final String categoria; 
   final double avaliacao; 
-  final int totalAvaliacoes; 
+  final int totalAvaliacoes;
+   final String description; 
   
 Producer({ 
   required this.id, 
@@ -14,6 +15,7 @@ Producer({
   required this.imageUrl, 
   required this.categoria, 
   required this.avaliacao, 
-  required this.totalAvaliacoes, 
+  required this.totalAvaliacoes,
+  required this.description, 
   }); 
 }

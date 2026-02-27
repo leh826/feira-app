@@ -15,7 +15,7 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDb() async {
-    String path = join(await getDatabasesPath(), 'docampo.db');
+    String path = join(await getDatabasesPath(), 'eguadafeira.db');
     return await openDatabase(
       path,
       version: 1,
@@ -33,19 +33,30 @@ class DatabaseHelper {
           )
         ''');
         
+        // Inserindo usuário de teste inicial
         await db.insert('users', {
-          'nome': 'Ana Silva',
-          'email': 'ana.silva@email.com',
+          'nome': 'Bruna Oliveira',
+          'email': 'bruna@gmail.com',
           'senha': '123',
+          'regiao': 'Norte',
+          'cidade': 'Belém',
+          'bairro': 'Centro',
+          'numero': '101'
+        });
+        await db.insert('users', {
+          'nome': 'Ana Julia',
+          'email': 'ana@gmail.com',
+          'senha': '123456789',
           'regiao': 'Norte',
           'cidade': 'Castanhal',
           'bairro': 'Centro',
-          'numero': '101'
+          'numero': '102'
         });
       },
     );
   }
 
+  // Realiza o login buscando as credenciais
   Future<Map<String, dynamic>?> login(String email, String senha) async {
     final db = await database;
     List<Map<String, dynamic>> res = await db.query(
@@ -54,5 +65,15 @@ class DatabaseHelper {
       whereArgs: [email, senha],
     );
     return res.isNotEmpty ? res.first : null;
+  }
+
+  Future<int> updateUser(Map<String, dynamic> user) async {
+    final db = await database;
+    return await db.update(
+      'users',
+      user,
+      where: 'id = ?',
+      whereArgs: [user['id']],
+    );
   }
 }
