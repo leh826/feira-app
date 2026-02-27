@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'features/home/home_page.dart';
 import 'features/perfil/perfil_page.dart';
 import 'features/pesquisa/pesquisa_page.dart';
+import 'features/login/login_page.dart';
 import 'widgets/custom_navbar.dart';
 import 'widgets/custom_topbar.dart';
 import 'core/utils/app_colors.dart';
@@ -18,30 +19,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.lightBeige,
-
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primaryGreen,
         ),
-
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.primaryGreen,
           foregroundColor: Colors.white,
           elevation: 0,
         ),
-
         cardColor: Colors.white,
         useMaterial3: true,
       ),
-
-      home: const MainPage(),
+      home: const LoginPage(), 
     );
   }
 }
+
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final Map<String, dynamic> userData;
+  const MainPage({super.key, required this.userData});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -50,11 +48,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
-final List<Widget> _pages = [
-  HomePage(producers: MockDatabase.producers),
-  const SearchScreen(),
-  const ProfilePage(),
-];
+  List<Widget> get _pages => [
+        HomePage(producers: MockDatabase.producers),
+        const SearchScreen(),
+        ProfilePage(userData: widget.userData),
+      ];
 
   void _changePage(int index) {
     setState(() {
@@ -66,11 +64,13 @@ final List<Widget> _pages = [
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomTopBar(),
-      body: _pages[_currentIndex],
+      
+      body: _pages[_currentIndex], 
+      
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
         onTap: _changePage,
-    ),
+      ),
     );
   }
 }
