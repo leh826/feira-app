@@ -1,3 +1,5 @@
+import 'package:eguadafeira/data/producers_data.dart';
+import 'package:eguadafeira/features/produtores/perfil_produtores.dart';
 import 'package:flutter/material.dart';
 import '../../models/product.dart';
 
@@ -8,6 +10,8 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final producer = MockDatabase.getProducerById(product.producerId);
+
     return Dialog(
       backgroundColor: Colors.transparent,
        insetPadding: const EdgeInsets.all(20),
@@ -56,9 +60,51 @@ class ProductDetailsPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-
+              
                 const SizedBox(height: 15),
 
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ProdutorScreen(producer: producer),
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.store,
+                          color: Color(0xFF2E5E2C),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            producer.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2E5E2C),
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 14,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 /// Conservação
                 const Text(
                   "Forma de Conservação",

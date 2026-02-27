@@ -9,9 +9,9 @@ class Product {
   final String category;
   final double rating;
 
- final String conservation; // NOVO
-  final String production;   // NOVO
-  final List<Review> reviews; // NOVO
+ final String conservation;
+  final String production;
+  final List<Review> reviews; 
 
   Product({
     required this.id,
