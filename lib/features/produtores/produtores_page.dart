@@ -1,4 +1,5 @@
 import 'package:eguadafeira/models/producer.dart';
+import 'package:eguadafeira/features/produtores/perfil_produtores.dart';
 import 'package:flutter/material.dart';
 
 class ProducerCard extends StatefulWidget {
@@ -15,7 +16,22 @@ class _ProducerCardState extends State<ProducerCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+
+     return InkWell(
+
+    borderRadius: BorderRadius.circular(24),
+
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProdutorScreen(
+            producer: widget.producer,
+          ),
+        ),
+      );
+    },
+    child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -169,6 +185,7 @@ class _ProducerCardState extends State<ProducerCard> {
           ],
         ),
       ),
+     ),
     );
   }
 }

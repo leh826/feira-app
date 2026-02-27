@@ -14,6 +14,7 @@ class MockDatabase {
       categoria: 'Hortifruti', 
       avaliacao: 4.5, 
       totalAvaliacoes: 120,
+      description: "Produtor familiar especializado em hortaliças orgânicas, cultivadas sem agrotóxicos e com práticas sustentáveis.",
     ),
     Producer(
       id: "p2",
@@ -23,6 +24,7 @@ class MockDatabase {
       categoria: 'Hortifruti', 
       avaliacao: 4.0, 
       totalAvaliacoes: 85,
+      description: "Produtor familiar especializado em hortaliças orgânicas, cultivadas sem agrotóxicos e com práticas sustentáveis.",
     ),
     Producer(
       id: "p3",
@@ -32,6 +34,7 @@ class MockDatabase {
       categoria: 'Hortifruti', 
       avaliacao: 5.0, 
       totalAvaliacoes: 150,
+      description: "Produtor familiar especializado em hortaliças orgânicas, cultivadas sem agrotóxicos e com práticas sustentáveis.",
     ),
   ];
 
@@ -54,7 +57,7 @@ class MockDatabase {
       id: "prod2",
       name: "Alface Crespa",
       price: 3.00,
-      producerId: "p1",
+      producerId: "p2",
       imageUrl: "https://images.unsplash.com/photo-1692606280428-7df25e4daefb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Hortaliças",
       rating: 4.0,
@@ -68,7 +71,7 @@ class MockDatabase {
       id: "prod3",
       name: "Cenoura",
       price: 5.20,
-      producerId: "p2",
+      producerId: "p3",
       imageUrl: "https://images.unsplash.com/photo-1769258896450-afaf01876052?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Legumes",
       rating: 4.0,
@@ -270,6 +273,7 @@ class MockDatabase {
         categoria: 'sem categoria',
         avaliacao: 0.0, 
         totalAvaliacoes: 0,
+        description: "Este produtor não possui informações disponíveis no momento.",
       ),
     );
   }
