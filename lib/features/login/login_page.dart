@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Icon(Icons.eco, color: verdeEscuro),
                   const SizedBox(width: 8),
-                  Text("DoCampo", style: TextStyle(color: verdeEscuro, fontWeight: FontWeight.bold, fontSize: 22)),
+                  Text("Égua da Feira", style: TextStyle(color: verdeEscuro, fontWeight: FontWeight.bold, fontSize: 22)),
                 ],
               ),
             ),
