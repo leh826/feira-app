@@ -67,6 +67,13 @@ class DatabaseHelper {
     return res.isNotEmpty ? res.first : null;
   }
 
+  // Insere um novo usuário e retorna o ID criado
+  Future<int> registerUser(Map<String, dynamic> user) async {
+    final db = await database;
+    return await db.insert('users', user);
+  }
+
+  //Atualiza usuário
   Future<int> updateUser(Map<String, dynamic> user) async {
     final db = await database;
     return await db.update(
