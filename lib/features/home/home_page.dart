@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   const HomePage({
     super.key,
     required this.producers,
-     required this.products,
+    required this.products,
   });
 
   @override
