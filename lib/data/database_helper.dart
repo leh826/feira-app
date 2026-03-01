@@ -67,6 +67,13 @@ class DatabaseHelper {
     return res.isNotEmpty ? res.first : null;
   }
 
+  // Insere um novo usuário e retorna o ID criado
+  Future<int> registerUser(Map<String, dynamic> user) async {
+    final db = await database;
+    return await db.insert('users', user);
+  }
+
+  //Atualiza usuário
   Future<int> updateUser(Map<String, dynamic> user) async {
     final db = await database;
     return await db.update(
@@ -75,5 +82,30 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [user['id']],
     );
+  }
+
+  //verfica se o email já está cadastrado
+  Future<bool> emailJaCadastrado(String email, {int? userId}) async {
+    final db = await database;
+
+    List<Map<String, dynamic>> res;
+
+    if (userId != null) {
+      // Caso de edição (ignora o próprio usuário)
+      res = await db.query(
+        'users',
+        where: 'email = ? AND id != ?',
+        whereArgs: [email, userId],
+      );
+    } else {
+      // Caso de cadastro normal
+      res = await db.query(
+        'users',
+        where: 'email = ?',
+        whereArgs: [email],
+      );
+    }
+
+    return res.isNotEmpty;
   }
 }

@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   const HomePage({
     super.key,
     required this.producers,
-     required this.products,
+    required this.products,
   });
 
   @override
@@ -25,6 +25,11 @@ class HomePage extends StatelessWidget {
       ..sort((a, b) => b.rating.compareTo(a.rating));
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text("Seja Bem-Vindo(a)!", style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

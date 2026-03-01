@@ -21,14 +21,14 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
   double? minRating;
   SortOption sortOption = SortOption.none;
 
-  final List<String> regions = [
+  List<String> regions = [
     "Belém",
     "Ananindeua",
     "Castanhal",
     "Todos",
   ];
 
-  final List<String> categories = [
+  List<String> categories = [
     "Frutas",
     "Verduras",
     "Hortaliças",
@@ -42,6 +42,11 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
   @override
   void initState() {
     super.initState();
+    
+    // Se a cidade do usuário não estiver na lista fixa, é adiciona dinamicamente.
+    if (!regions.contains(widget.filters.region)) {
+      regions.insert(0, widget.filters.region);
+    }
     region = widget.filters.region;
     category = widget.filters.category;
     minRating = widget.filters.minRating;
@@ -50,6 +55,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
 
   Widget _buildStars(double rating) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: List.generate(
         5,
         (index) => Icon(
@@ -72,7 +78,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            /// Título + botão fechar (igual ao modal de produto)
+            /// Título + botão fechar
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -99,6 +105,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
 
             DropdownButtonFormField<String>(
               value: region,
+              isExpanded: true, 
               decoration: const InputDecoration(
                 labelText: "Região",
                 border: OutlineInputBorder(),
@@ -113,6 +120,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
 
             DropdownButtonFormField<String>(
               value: category,
+              isExpanded: true,
               decoration: const InputDecoration(
                 labelText: "Categoria",
                 border: OutlineInputBorder(),
@@ -125,16 +133,18 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
 
             const SizedBox(height: 16),
 
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: const Text(
+              child: Text(
                 "Avaliação mínima",
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
             const SizedBox(height: 8),
+
             Wrap(
               spacing: 8,
+              runSpacing: 8, 
               children: [5, 4, 3, 2, 1].map((star) {
                 return ChoiceChip(
                   label: _buildStars(star.toDouble()),
@@ -148,7 +158,13 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
 
             SizedBox(
               width: double.infinity,
+              height: 50,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Colors.white,
+                ),
                 onPressed: () {
                   widget.onApply(
                     FilterModel(
@@ -160,7 +176,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
                   );
                   Navigator.pop(context);
                 },
-                child: const Text("Aplicar Filtros"),
+                child: const Text("Aplicar Filtros", style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ],
