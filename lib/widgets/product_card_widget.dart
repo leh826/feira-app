@@ -6,13 +6,17 @@ import '../models/producer.dart';
 class ProductCardWidget extends StatelessWidget {
   final Product product;
   final Producer producer;
-   final VoidCallback? onTap;
+  final VoidCallback? onTap;
+  final double? width; // <-- Adicione isso
+  final EdgeInsetsGeometry? margin; // <-- Adicione isso
 
   const ProductCardWidget({
     super.key,
     required this.product,
     required this.producer,
     this.onTap,
+    this.width = 130,
+    this.margin = const EdgeInsets.only(right: 12),
   });
 
   @override
@@ -20,8 +24,8 @@ class ProductCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 130,
-        margin: const EdgeInsets.only(right: 12),
+        width: width,
+        margin: margin,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
@@ -45,7 +49,7 @@ class ProductCardWidget extends StatelessWidget {
               ),
               child: Image.network(
                 product.imageUrl,
-                height: 100,
+                height: 150,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

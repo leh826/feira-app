@@ -1,3 +1,5 @@
+import 'package:eguadafeira/features/produtos/product_details_page.dart';
+import 'package:eguadafeira/widgets/product_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:eguadafeira/models/producer.dart';
 import 'package:eguadafeira/models/product.dart';
@@ -53,92 +55,12 @@ class ProdutorScreen extends StatelessWidget {
     }
   }
 
-  void mostrarModalProduto(BuildContext context, Product produto) {
+void mostrarModalProduto(BuildContext context, Product produto) {
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        title: Text(
-          produto.name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                produto.imageUrl,
-                width: 350,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            // Categoria
-            RichText(
-              text: TextSpan(
-                style: const TextStyle(fontSize: 14, color: Colors.black87),
-                children: [
-                  TextSpan(
-                    text: "Categoria: ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryGreen,
-                    ),
-                  ),
-                  TextSpan(text: produto.category),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 6),
-
-            // Conservação
-            RichText(
-              text: TextSpan(
-                style: const TextStyle(fontSize: 14, color: Colors.black87),
-                children: [
-                  TextSpan(
-                    text: "Conservação: ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryGreen,
-                    ),
-                  ),
-                  TextSpan(text: produto.conservation),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 6),
-
-            // Produção
-            RichText(
-              text: TextSpan(
-                style: const TextStyle(fontSize: 14, color: Colors.black87),
-                children: [
-                  TextSpan(
-                    text: "Produção: ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryGreen,
-                    ),
-                  ),
-                  TextSpan(text: produto.production),
-                ],
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            child: const Text("Fechar"),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ],
+      builder: (_) => ProductDetailsPage(
+        product: produto,
+        showVendorButton: false, // Isso remove o botão "Ir ao vendedor"
       ),
     );
   }
@@ -239,51 +161,25 @@ class ProdutorScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: produtosDoProdutor.length,
-
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.8,
-              ),
-
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: produtosDoProdutor.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12, 
+              mainAxisSpacing: 12,  
+              childAspectRatio: 0.85,
+            ),
               itemBuilder: (context, index) {
                 final produto = produtosDoProdutor[index];
 
-                return GestureDetector(
+                return ProductCardWidget(
+                  product: produto,
+                  producer: producer,
                   onTap: () => mostrarModalProduto(context, produto),
-
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: const [
-                        BoxShadow(blurRadius: 4, color: Colors.black12),
-                      ],
-                    ),
-
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(12),
-                            ),
-                            child: Image.network(produto.imageUrl),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Text(produto.name),
-                        ),
-                      ],
-                    ),
-                  ),
+                  width: double.infinity,
+                  margin: EdgeInsets.zero,
                 );
               },
             ),
