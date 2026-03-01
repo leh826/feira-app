@@ -5,8 +5,13 @@ import '../../models/product.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final Product product;
+  final bool showVendorButton;
 
-  const ProductDetailsPage({super.key, required this.product});
+  const ProductDetailsPage({
+    super.key, 
+    required this.product, 
+    this.showVendorButton = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +71,10 @@ class ProductDetailsPage extends StatelessWidget {
               const SizedBox(height: 15),
 
               /// BOTÃO "IR AO VENDEDOR"
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
+              if (showVendorButton)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -114,7 +120,7 @@ class ProductDetailsPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              if (showVendorButton)const SizedBox(height: 20),
 
               /// Seção: Conservação
               const Text(
