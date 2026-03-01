@@ -1,3 +1,4 @@
+import 'package:eguadafeira/core/utils/app_colors.dart';
 import 'package:eguadafeira/features/produtos/product_details_page.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/search_bar_widget.dart';
@@ -75,9 +76,9 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  void _clearFilters() {
+void _clearFilters() {
     setState(() {
-      // Ao limpar, voltamos para a cidade do usuário logado em vez de "Todos"
+      // 1. Reseta os filtros
       filters = FilterModel(
         region: widget.userData['cidade'] ?? "Todos",
         category: null,
@@ -86,6 +87,29 @@ class _SearchScreenState extends State<SearchScreen> {
       );
       _applySearch();
     });
+
+    // 2. Remove qualquer SnackBar que ainda esteja na tela
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+    // 3. Informa ao usuário que os filtros foram limpos
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Row(
+          children: [
+            Icon(Icons.filter_list_off, color: Colors.white),
+            SizedBox(width: 12),
+            Text("Filtros limpos com sucesso!"),
+          ],
+        ),
+        backgroundColor: AppColors.primaryGreen, // O verde escuro da sua marca
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating, // Faz a SnackBar flutuar (mais moderno)
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: const EdgeInsets.all(16), // Espaçamento das bordas da tela
+      ),
+    );
   }
 
   @override
