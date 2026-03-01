@@ -80,15 +80,14 @@ class HomePage extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              SizedBox(
-                height: 170,
-                child: PageView.builder(
-                  controller: PageController(viewportFraction: 0.42),
-                  itemCount: products.length,
+                SizedBox(
+                  height: 190, 
+                  child: PageView.builder(
+                  controller: PageController(viewportFraction: 0.7), 
+                  itemCount: topProducts.length,
                   itemBuilder: (context, index) {
                     final product = topProducts[index];
 
-                    // Você precisa encontrar o produtor desse produto
                     final producer = producers.firstWhere(
                       (p) => p.id == product.producerId,
                     );
@@ -97,12 +96,12 @@ class HomePage extends StatelessWidget {
                       product: product,
                       producer: producer,
                       onTap: () {
-                      showDialog(
-                        context: context,
-                        barrierColor: Colors.black54,
-                        builder: (_) => ProductDetailsPage(product: product),
-                      );
-                    },
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.black54,
+                          builder: (_) => ProductDetailsPage(product: product),
+                        );
+                      },
                     );
                   },
                 ),

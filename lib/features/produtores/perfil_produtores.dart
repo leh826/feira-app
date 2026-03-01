@@ -167,9 +167,9 @@ void mostrarModalProduto(BuildContext context, Product produto) {
             itemCount: produtosDoProdutor.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 12, 
-              mainAxisSpacing: 12,  
-              childAspectRatio: 0.85,
+              crossAxisSpacing: 1, 
+              mainAxisSpacing: 1,  
+              childAspectRatio: 0.95,
             ),
               itemBuilder: (context, index) {
                 final produto = produtosDoProdutor[index];
@@ -178,8 +178,6 @@ void mostrarModalProduto(BuildContext context, Product produto) {
                   product: produto,
                   producer: producer,
                   onTap: () => mostrarModalProduto(context, produto),
-                  width: double.infinity,
-                  margin: EdgeInsets.zero,
                 );
               },
             ),
