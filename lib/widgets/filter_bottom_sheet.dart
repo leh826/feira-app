@@ -107,7 +107,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
               value: region,
               isExpanded: true, 
               decoration: const InputDecoration(
-                labelText: "Região",
+                labelText: "Cidade",
                 border: OutlineInputBorder(),
               ),
               items: regions
