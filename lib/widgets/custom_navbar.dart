@@ -53,8 +53,9 @@ class CustomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(index),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        duration: const Duration(milliseconds: 300),
+        // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryGreen : Colors.transparent,
           borderRadius: BorderRadius.circular(20),

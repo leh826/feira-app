@@ -68,9 +68,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: const CustomTopBar(),
       body: _pages[_currentIndex],
-      bottomNavigationBar: CustomNavBar(
-        currentIndex: _currentIndex,
-        onTap: _changePage,
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: CustomNavBar(
+          currentIndex: _currentIndex,
+          onTap: _changePage,
+        ),
       ),
     );
   }

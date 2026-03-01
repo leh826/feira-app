@@ -5,6 +5,7 @@ import '../../widgets/search_bar_widget.dart';
 import '../../widgets/product_card_widget.dart';
 import '../../widgets/filter_action_bar.dart';
 import '../../widgets/filter_bottom_sheet.dart';
+import '../../widgets/active_filters_widget.dart';
 import '../../data/producers_data.dart';
 import '../../models/product.dart';
 import '../../models/producer.dart';
@@ -76,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-void _clearFilters() {
+  void _clearFilters() {
     setState(() {
       // 1. Reseta os filtros
       filters = FilterModel(
@@ -127,6 +128,16 @@ void _clearFilters() {
             onOpenFilters: _openFilters,
             onClear: _clearFilters,
             onSortChanged: _onSortChanged,
+          ),
+
+          ActiveFiltersWidget(
+            filters: filters,
+            onRemove: (newFilters) {
+              setState(() {
+                filters = newFilters;
+                _applySearch();
+              });
+            },
           ),
 
           Expanded(
