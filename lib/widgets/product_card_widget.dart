@@ -20,8 +20,10 @@ class ProductCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 130,
-        margin: const EdgeInsets.only(right: 12),
+        // width: 130,
+        //margin: const EdgeInsets.only(right: 12),
+        width: double.infinity,
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
@@ -52,7 +54,7 @@ class ProductCardWidget extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(10), 
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -65,25 +67,25 @@ class ProductCardWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis, 
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                      fontSize: 15,
                     ),
                   ),
 
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 8),
 
                   /// Avaliação
                   Row(
                     children: [
                       const Icon(
                         Icons.star,
-                        size: 14,
+                        size: 16,
                         color: Colors.amber,
                         
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: 6),
                       Text(
                         product.rating.toString(),
-                        style: const TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
