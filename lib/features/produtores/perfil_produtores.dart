@@ -17,12 +17,40 @@ class ProdutorScreen extends StatelessWidget {
         .toList();
   }
 
-  Future<void> abrirWhatsApp() async {
+    Future<void> abrirWhatsApp(BuildContext context) async {
     final Uri url = Uri.parse(
       "https://wa.me/5591985958964?text=Olá, tenho interesse nos produtos de ${producer.name}!",
     );
 
-    await launchUrl(url, mode: LaunchMode.externalApplication);
+    final bool? confirmar = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Abrir WhatsApp"),
+        content: const Text(
+          "Você será redirecionado para o WhatsApp. Deseja continuar?",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text("Cancelar"),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primaryGreen,
+            ),
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text(
+              "Continuar",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmar == true) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    }
   }
 
   void mostrarModalProduto(BuildContext context, Product produto) {
@@ -123,7 +151,7 @@ class ProdutorScreen extends StatelessWidget {
       appBar: AppBar(title: Text(producer.name)),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: abrirWhatsApp,
+        onPressed: () => abrirWhatsApp(context),
         backgroundColor: AppColors.primaryGreen,
         child: const FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white),
       ),
