@@ -83,4 +83,29 @@ class DatabaseHelper {
       whereArgs: [user['id']],
     );
   }
+
+  //verfica se o email já está cadastrado
+  Future<bool> emailJaCadastrado(String email, {int? userId}) async {
+    final db = await database;
+
+    List<Map<String, dynamic>> res;
+
+    if (userId != null) {
+      // Caso de edição (ignora o próprio usuário)
+      res = await db.query(
+        'users',
+        where: 'email = ? AND id != ?',
+        whereArgs: [email, userId],
+      );
+    } else {
+      // Caso de cadastro normal
+      res = await db.query(
+        'users',
+        where: 'email = ?',
+        whereArgs: [email],
+      );
+    }
+
+    return res.isNotEmpty;
+  }
 }

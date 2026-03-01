@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../widgets/custom_password_field.dart';
+import '../../core/utils/validators.dart';
 import '../../data/database_helper.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -34,10 +36,34 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Função para salvar no Banco de Dados
   Future<void> _salvarDados() async {
+    String novoEmail = _emailController.text.trim();
+
+    String? erroEmail = AppValidators.validarEmail(novoEmail);
+    if (erroEmail != null) {
+      _resetarCampos();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(erroEmail)),
+      );
+      return;
+    }
+
+    bool emailExiste = await DatabaseHelper()
+        .emailJaCadastrado(novoEmail, userId: widget.userData['id']);
+
+    if (emailExiste) {
+      _resetarCampos();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Este e-mail já está em uso por outro usuário."),
+        ),
+      );
+      return;
+    }
+
     Map<String, dynamic> usuarioAtualizado = {
       'id': widget.userData['id'],
       'nome': _nomeController.text,
-      'email': _emailController.text,
+      'email': novoEmail,
       'regiao': _regiaoController.text,
       'cidade': _cidadeController.text,
       'bairro': _bairroController.text,
@@ -46,12 +72,23 @@ class _ProfilePageState extends State<ProfilePage> {
     };
 
     await DatabaseHelper().updateUser(usuarioAtualizado);
-    
+
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Dados salvos no banco com sucesso!")),
+        const SnackBar(content: Text("Dados salvos com sucesso!")),
       );
     }
+  }
+
+  void _resetarCampos() {
+    setState(() {
+      _nomeController.text = widget.userData['nome'];
+      _emailController.text = widget.userData['email'];
+      _regiaoController.text = widget.userData['regiao'];
+      _cidadeController.text = widget.userData['cidade'];
+      _bairroController.text = widget.userData['bairro'];
+      _numeroController.text = widget.userData['numero'];
+    });
   }
 
   InputDecoration campo(String label) {
@@ -105,6 +142,22 @@ class _ProfilePageState extends State<ProfilePage> {
                 Expanded(child: TextFormField(controller: _numeroController, enabled: editando, decoration: campo("Nº"))),
               ],
             ),
+
+            const SizedBox(height: 15),
+
+            AbsorbPointer(
+              absorbing: !editando,
+              child: Opacity(
+                opacity: editando ? 1.0 : 0.7,
+                child: CustomPasswordField(
+                  controller: TextEditingController(text: widget.userData['senha']),
+                  label: "Sua Senha",
+                  themeColor: verde,
+                  validator: AppValidators.campoObrigatorio,
+                ),
+              ),
+            ),
+
             const SizedBox(height: 30),
             SizedBox(
               width: double.infinity,

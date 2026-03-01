@@ -4,6 +4,7 @@ import '/data/database_helper.dart';
 import '../../../main.dart';
 import '../../core/utils/validators.dart';
 import '../cadastro/cadastro_page.dart';
+import '../../widgets/custom_password_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -70,19 +71,18 @@ class _LoginPageState extends State<LoginPage> {
 
               TextFormField(
                 controller: _emailController,
-                decoration: _inputStyle("Email"),
+                decoration: _inputStyle("Email *"),
                 keyboardType: TextInputType.emailAddress,
                 validator: AppValidators.validarEmail, // VALIDAÇÃO REUTILIZÁVEL
                 autovalidateMode: AutovalidateMode.onUserInteraction, // FAZ O ERRO SUMIR AO DIGITAR
               ),
               const SizedBox(height: 20),
 
-              TextFormField(
+              CustomPasswordField(
                 controller: _senhaController,
-                obscureText: true,
-                decoration: _inputStyle("Senha"),
+                label: "Senha *",
+                themeColor: verdeEscuro,
                 validator: AppValidators.campoObrigatorio,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
               const SizedBox(height: 40),
 
