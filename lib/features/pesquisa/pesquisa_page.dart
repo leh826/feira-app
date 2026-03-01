@@ -77,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-void _clearFilters() {
+  void _clearFilters() {
     setState(() {
       // 1. Reseta os filtros
       filters = FilterModel(
