@@ -22,16 +22,28 @@ class _LoginPageState extends State<LoginPage> {
   final Color verdeEscuro = const Color(0xFF356B33);
 
   void _tentarLogin() async {
-    // Valida todos os campos do formulário de uma vez
+    bool jaExiste = await DatabaseHelper().emailJaCadastrado(_emailController.text);
+
     if (_formKey.currentState!.validate()) {
       var user = await DatabaseHelper().login(_emailController.text, _senhaController.text);
       if (user != null) {
         if (mounted) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(userData: user)));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(userData: user)));
         }
       } else {
+        if (!jaExiste) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Conta não encontrada. Verifique o e-mail e senha ou cadastre-se.")
+              )
+            );
+          }
+          return;
+        }
+        
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou senha inválidos")));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("E-mail ou senha incorretos. Verifique os dados e tente novamente.")));
         }
       }
     }

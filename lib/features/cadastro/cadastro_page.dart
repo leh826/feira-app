@@ -1,9 +1,24 @@
 import 'package:eguadafeira/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import '/data/database_helper.dart';
 import '../../../main.dart';
 import '../../core/utils/validators.dart';
 import '../../widgets/custom_password_field.dart';
+
+
+  final List<String> _estados = [
+  'Acre', 'Alagoas', 'Amapá',
+  'Amazonas', 'Bahia', 'Ceará',
+  'Distrito Federal', 'Espírito Santo',
+  'Goiás', 'Maranhão', 'Mato Grosso',
+  'Mato Grosso do Sul', 'Minas Gerais',
+  'Pará', 'Paraíba', 'Paraná',
+  'Pernambuco', 'Piauí', 'Rio de Janeiro',
+  'Rio Grande do Norte', 'Rio Grande do Sul',
+  'Rondônia', 'Roraima', 'Santa Catarina',
+  'São Paulo', 'Sergipe', 'Tocantins',
+  ];
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});
@@ -202,11 +217,53 @@ class _CadastroPageState extends State<CadastroPage> {
               ),
               const SizedBox(height: 15),
 
+              Row(
+                children: [
+                  const Expanded(child: Divider()),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Campos opcionais",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.darkGrey.withOpacity(0.6),
+                      ),
+                    ),
+                  ),
+                  const Expanded(child: Divider()),
+                ],
+              ),
+
+              const SizedBox(height: 15),
+
               // Campos Opcionais
               Row(
                 children: [
-                  Expanded(child: TextFormField(controller: _regiaoController, decoration: _inputStyle("Região"))),
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      value: _regiaoController.text.isEmpty ? null : _regiaoController.text,
+                      decoration: _inputStyle("Estado"),
+                      icon: Icon(Icons.arrow_drop_down, color: verdeEscuro),
+                      isExpanded: true,
+                      items: _estados.map((String estado) {
+                        return DropdownMenuItem<String>(
+                          value: estado,
+                          child: Text(estado, style: const TextStyle(fontSize: 14)),
+                        );
+                      }).toList(),
+                      
+                      onChanged: (String? novoValor) {
+                        setState(() {
+                          _regiaoController.text = novoValor ?? "";
+                        });
+                      },
+                      
+                    ),
+                  ),
+
                   const SizedBox(width: 10),
+                  
                   Expanded(child: TextFormField(controller: _bairroController, decoration: _inputStyle("Bairro"))),
                 ],
               ),
