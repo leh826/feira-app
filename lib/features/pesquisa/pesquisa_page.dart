@@ -165,6 +165,12 @@ class _SearchScreenState extends State<SearchScreen> {
         children: [
 
           /// CARD DE AJUDA (IGUAL AO DA IMAGEM)
+
+          SearchBarWidget(
+            onChanged: _onSearchChanged,
+            onFilterTap: _openFilters,
+          ),
+
           GestureDetector(
             onTap: _openHelp,
             child: Container(
@@ -173,7 +179,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 horizontal: 16,
                 vertical: 16,
               ),
-              color: const Color(0xFFEDE6D6), // Bege semelhante ao da imagem
+              color: AppColors.lightBeige, // Bege semelhante ao da imagem
               child: Row(
                 children: [
                   Container(
@@ -222,11 +228,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
             ),
-          ),
-
-          SearchBarWidget(
-            onChanged: _onSearchChanged,
-            onFilterTap: _openFilters,
           ),
 
           FilterActionBar(
