@@ -7,6 +7,7 @@ import 'package:eguadafeira/data/producers_data.dart';
 import 'package:eguadafeira/core/utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../widgets/custom_help.dart';
 
 class ProdutorScreen extends StatelessWidget {
   final Producer producer;
@@ -70,7 +71,55 @@ void mostrarModalProduto(BuildContext context, Product produto) {
     return Scaffold(
       backgroundColor: const Color(0xFFE8E3D3),
 
-      appBar: AppBar(title: Text(producer.name)),
+      appBar: AppBar(
+        title: Text(producer.name),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
+                ),
+                builder: (_) => CustomHelp(
+                  title: "Ajuda da Tela",
+                  primaryColor: AppColors.primaryGreen,
+                  items: [
+                    HelpItem(
+                      question: "O que é esta tela?",
+                      answer:
+                          "Aqui você visualiza o perfil completo do produtor, incluindo informações, avaliações e produtos disponíveis.",
+                    ),
+                    HelpItem(
+                      question: "Como entrar em contato?",
+                      answer:
+                          "Toque no botão verde do WhatsApp no canto inferior direito para falar diretamente com o produtor.",
+                    ),
+                    HelpItem(
+                      question: "O que significa a avaliação?",
+                      answer:
+                          "Mostra a média das notas dadas por clientes que já compraram com este produtor.",
+                    ),
+                    HelpItem(
+                      question: "Como ver os detalhes de um produto?",
+                      answer:
+                          "Toque em qualquer produto da grade para visualizar suas informações completas.",
+                    ),
+                    HelpItem(
+                      question: "O que é a seção 'Sobre o produtor'?",
+                      answer:
+                          "Apresenta uma descrição com mais detalhes sobre o produtor e sua forma de trabalho.",
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => abrirWhatsApp(context),

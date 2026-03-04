@@ -1,3 +1,4 @@
+import 'package:eguadafeira/widgets/custom_help.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/custom_password_field.dart';
 import '../../core/utils/validators.dart';
@@ -187,7 +188,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
 
-            //Ajuda
             ListTile(
               leading: Icon(Icons.help_outline, color: verde),
               title: const Text("Precisa de ajuda?"),
@@ -196,46 +196,31 @@ class _ProfilePageState extends State<ProfilePage> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-                  builder: (context) => Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Central de Ajuda", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: verde)),
-                        
-                        const SizedBox(height: 15),
-                        
-                        const Text(
-                          "Como editar meu perfil?",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF2E5E2C),
-                          ),
-                        ),
-                        const Text("• Clique no botão 'Editar Perfil', altere os campos e clique em 'Salvar'."),
-                        
-                        const SizedBox(height: 10),
-
-                        const Text(
-                          "Meus dados são seguros?",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF2E5E2C),
-                          ),
-                        ),
-                        const Text("• Sim, utilizamos criptografia local para proteger suas informações."),
-                        
-                        const SizedBox(height: 20),
-                        
-                        Center(
-                          child: TextButton(onPressed: () => Navigator.pop(context), child: const Text("Entendi")),
-                        )
-                      ],
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
                     ),
+                  ),
+                  builder: (_) => CustomHelp(
+                    title: "Central de Ajuda",
+                    primaryColor: verde,
+                    items: [
+                      HelpItem(
+                        question: "Como editar meu perfil?",
+                        answer:
+                            "Clique no botão 'Editar Perfil', altere os campos e clique em 'Salvar'.",
+                      ),
+                      HelpItem(
+                        question: "Meus dados são seguros?",
+                        answer:
+                            "Sim, utilizamos criptografia local para proteger suas informações.",
+                      ),
+                    ],
                   ),
                 );
               },
             ),
+          
 
             const SizedBox(height: 30),
             SizedBox(

@@ -10,6 +10,7 @@ import '../../data/producers_data.dart';
 import '../../models/product.dart';
 import '../../models/producer.dart';
 import '../../models/filter_model.dart';
+import '../../widgets/custom_help.dart';
 
 class SearchScreen extends StatefulWidget {
   final Map<String, dynamic> userData;
@@ -21,19 +22,18 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String searchText = "";
-  
+
   late FilterModel filters;
   List<Product> results = [];
 
   @override
   void initState() {
     super.initState();
-    
-    // Inicializa os filtros com a cidade do usuário logado
+
     filters = FilterModel(
       region: widget.userData['cidade'] ?? "Todos",
     );
-    
+
     _applySearch();
   }
 
@@ -79,7 +79,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _clearFilters() {
     setState(() {
-      // 1. Reseta os filtros
       filters = FilterModel(
         region: widget.userData['cidade'] ?? "Todos",
         category: null,
@@ -89,10 +88,8 @@ class _SearchScreenState extends State<SearchScreen> {
       _applySearch();
     });
 
-    // 2. Remove qualquer SnackBar que ainda esteja na tela
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
-    // 3. Informa ao usuário que os filtros foram limpos
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Row(
@@ -102,13 +99,61 @@ class _SearchScreenState extends State<SearchScreen> {
             Text("Filtros limpos com sucesso!"),
           ],
         ),
-        backgroundColor: AppColors.primaryGreen, // O verde escuro da sua marca
+        backgroundColor: AppColors.primaryGreen,
         duration: const Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating, // Faz a SnackBar flutuar (mais moderno)
+        behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        margin: const EdgeInsets.all(16), // Espaçamento das bordas da tela
+        margin: const EdgeInsets.all(16),
+      ),
+    );
+  }
+
+  void _openHelp() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+      builder: (_) => CustomHelp(
+        title: "Ajuda da Tela de Pesquisa",
+        primaryColor: AppColors.primaryGreen,
+        items: [
+          HelpItem(
+            question: "O que posso fazer nesta tela?",
+            answer:
+                "Aqui você pode pesquisar produtos pelo nome e aplicar filtros para encontrar exatamente o que procura.",
+          ),
+          HelpItem(
+            question: "Como funciona a busca?",
+            answer:
+                "Digite o nome do produto na barra de pesquisa. Os resultados são atualizados automaticamente.",
+          ),
+          HelpItem(
+            question: "Como usar os filtros?",
+            answer:
+                "Toque no botão de filtros para selecionar categoria, avaliação mínima ou ordenação.",
+          ),
+          HelpItem(
+            question: "O que são filtros ativos?",
+            answer:
+                "Mostram quais filtros estão aplicados no momento e permitem removê-los individualmente.",
+          ),
+          HelpItem(
+            question: "Como limpar todos os filtros?",
+            answer:
+                "Toque em 'Limpar' na barra de ações para resetar todos os filtros.",
+          ),
+          HelpItem(
+            question: "Como ver detalhes do produto?",
+            answer:
+                "Toque em qualquer produto listado para abrir a tela de detalhes.",
+          ),
+        ],
       ),
     );
   }
@@ -118,6 +163,67 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       body: Column(
         children: [
+
+          /// CARD DE AJUDA (IGUAL AO DA IMAGEM)
+          GestureDetector(
+            onTap: _openHelp,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
+              ),
+              color: const Color(0xFFEDE6D6), // Bege semelhante ao da imagem
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.primaryGreen,
+                        width: 1.5,
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(6),
+                    child: Icon(
+                      Icons.question_mark,
+                      color: AppColors.primaryGreen,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Precisa de ajuda?",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "Veja como funciona a busca no Égua da Feira.",
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Colors.black54,
+                  )
+                ],
+              ),
+            ),
+          ),
+
           SearchBarWidget(
             onChanged: _onSearchChanged,
             onFilterTap: _openFilters,
@@ -162,7 +268,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           showDialog(
                             context: context,
                             barrierColor: Colors.black54,
-                            builder: (_) => ProductDetailsPage(product: product),
+                            builder: (_) =>
+                                ProductDetailsPage(product: product),
                           );
                         },
                       );

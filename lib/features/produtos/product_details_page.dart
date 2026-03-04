@@ -2,6 +2,7 @@ import 'package:eguadafeira/data/producers_data.dart';
 import 'package:eguadafeira/features/produtores/perfil_produtores.dart';
 import 'package:flutter/material.dart';
 import '../../models/product.dart';
+import '../../widgets/custom_help.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final Product product;
@@ -44,13 +45,62 @@ class ProductDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: const Color(0xFF2E5E2C),
-                    radius: 18,
-                    child: IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white, size: 18),
-                      onPressed: () => Navigator.pop(context),
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.help_outline, color: Color(0xFF2E5E2C)),
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
+                            
+                            builder: (_) => CustomHelp(
+                              title: "Ajuda da Tela",
+                              primaryColor: const Color(0xFF2E5E2C),
+                              items: [
+                                HelpItem(
+                                  question: "O que é esta tela?",
+                                  answer:
+                                      "Aqui você pode visualizar todos os detalhes do produto selecionado, incluindo informações de produção, conservação e avaliações.",
+                                ),
+                                HelpItem(
+                                  question: "Como ver o perfil do vendedor?",
+                                  answer:
+                                      "Toque no botão 'Ir ao vendedor' para acessar o perfil completo do produtor e visualizar outros produtos disponíveis.",
+                                ),
+                                HelpItem(
+                                  question: "O que significa Forma de Conservação?",
+                                  answer:
+                                      "Mostra como o produto deve ser armazenado para manter sua qualidade e durabilidade.",
+                                ),
+                                HelpItem(
+                                  question: "O que é Forma de Produção?",
+                                  answer:
+                                      "Descreve como o produto foi produzido, incluindo métodos utilizados pelo produtor.",
+                                ),
+                                HelpItem(
+                                  question: "Como funcionam as avaliações?",
+                                  answer:
+                                      "As avaliações mostram comentários e notas dadas por outros usuários que já adquiriram o produto.",
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      CircleAvatar(
+                        backgroundColor: const Color(0xFF2E5E2C),
+                        radius: 18,
+                        child: IconButton(
+                          icon: const Icon(Icons.close, color: Colors.white, size: 18),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
