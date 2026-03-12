@@ -80,7 +80,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void _clearFilters() {
     setState(() {
       filters = FilterModel(
-        region: widget.userData['cidade'] ?? "Todos",
+        region: "Todos",
         category: null,
         minRating: null,
         sortOption: SortOption.none,
@@ -97,6 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Icon(Icons.filter_list_off, color: Colors.white),
             SizedBox(width: 12),
             Text("Filtros limpos com sucesso!"),
+            Text("Mostrando produtos de todas as regiões"),
           ],
         ),
         backgroundColor: AppColors.primaryGreen,

@@ -19,14 +19,14 @@ class ActiveFiltersWidget extends StatelessWidget {
     if (filters.category != null) {
       chips.add(_chip(
         filters.category!,
-        () => onRemove(filters.copyWith(category: null)),
+        () => onRemove(filters.copyWith(clearCategory: true))
       ));
     }
 
     if (filters.minRating != null) {
       chips.add(_chip(
         "${filters.minRating!.toInt()}★ ou mais",
-        () => onRemove(filters.copyWith(minRating: null)),
+        () => onRemove(filters.copyWith(clearMinRating: true))
       ));
     }
 

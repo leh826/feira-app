@@ -16,11 +16,13 @@ class FilterModel {
     String? category,
     double? minRating,
     SortOption? sortOption,
+    bool clearCategory = false,
+    bool clearMinRating = false,
   }) {
     return FilterModel(
       region: region ?? this.region,
-      category: category ?? this.category,
-      minRating: minRating ?? this.minRating,
+      category: clearCategory ? null : (category ?? this.category),
+      minRating: clearMinRating ? null : (minRating ?? this.minRating),
       sortOption: sortOption ?? this.sortOption,
     );
   }

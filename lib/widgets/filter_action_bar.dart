@@ -45,7 +45,7 @@ class FilterActionBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          // 🔎 Botão Filtros (com cor do app)
+          // Botão Filtros (com cor do app)
           Expanded(
             child: OutlinedButton.icon(
               onPressed: onOpenFilters,

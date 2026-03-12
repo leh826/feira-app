@@ -22,10 +22,10 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
   SortOption sortOption = SortOption.none;
 
   List<String> regions = [
+    "Todos",
     "Belém",
     "Ananindeua",
     "Castanhal",
-    "Todos",
   ];
 
   List<String> categories = [
@@ -44,8 +44,9 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
     super.initState();
     
     // Se a cidade do usuário não estiver na lista fixa, é adiciona dinamicamente.
-    if (!regions.contains(widget.filters.region)) {
-      regions.insert(0, widget.filters.region);
+    if (widget.filters.region != "Todos" &&
+    !regions.contains(widget.filters.region)) {
+    regions.insert(0, widget.filters.region);
     }
     region = widget.filters.region;
     category = widget.filters.category;
@@ -136,7 +137,7 @@ class _FilterDialogWidgetState extends State<FilterDialogWidget> {
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Avaliação mínima",
+                "Mostrar produtos com no mínimo:",
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
