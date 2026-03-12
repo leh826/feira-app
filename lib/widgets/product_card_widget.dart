@@ -52,7 +52,6 @@ class ProductCardWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(

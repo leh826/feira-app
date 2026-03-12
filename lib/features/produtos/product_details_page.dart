@@ -120,6 +120,22 @@ class ProductDetailsPage extends StatelessWidget {
 
               const SizedBox(height: 15),
 
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "R\$ ${product.price.toStringAsFixed(2)}/${product.unit}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2E5E2C),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 15),
+
               /// BOTÃO "IR AO VENDEDOR"
               if (showVendorButton)
                 Container(
